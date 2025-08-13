@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+      .parameters{
+        text-align: left;
+        color:white;
+      }
+      body{
+        background: url("/static/added.jpg")no-repeat;
+        background-size: cover;
+      }
+       
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <span class="navbar-brand mb=0 h1"><img src="/static/cbitlogo.png" width="40" alt="">  </span>
+    <h3 style="color: white;">Admin</h3>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{%url 'adminhome'%}" class="nav-link" style="color: white;">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" style="color: white;">Notifications</a></li>
+        <li class="nav-item"><a href="{%url 'home'%}" class="nav-link" style="color: white;">Logout</a></li>
+
+    </ul>
+  </nav> 
+     
+   {% if data %}  
+   <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          {% for key in data.0.keys %}
+          <th scope="col">{{ key }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+      {% for dict_item in data %}
+      <form  class="form-container" action="{%url 'acceptdeny' %}" method="POST">
+        {% csrf_token %} 
+        <tr>
+         <th scope="row">{{forloop.counter}}</th>
+         {% for value in dict_item.values %}
+         {% if value == 0 or value == 1  %}
+         <td>
+           <button type="submit" class="btn btn-success" name="status" value=1>Accept</button>
+         <button type="submit" class="btn btn-danger" name="status" value=0>Deny</button>
+         <input type="hidden" name="clubname" value= "{{dict_item.clubname}}" >
+        </td>
+         
+         {% else %}
+         <td> {{ value }} </td>
+         {% endif %}
+         
+          {% endfor %}
+        </tr>
+      </form> 
+        {% endfor %}
+      </tbody>
+    </table>
+  
+{% endif %}
+
+  
+ 
+    
+
+ 
+  </body>
+</html>
+
+    
+    

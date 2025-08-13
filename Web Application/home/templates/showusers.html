@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+      .row.content {height: 1000px}
+      .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+      }
+      @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+      }
+
+      .jumbotron{
+           position: relative;
+           background: none;
+
+       }
+       h1{
+           text-align: center ;
+       }
+       p{
+           text-align: center;
+       }
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <span class="navbar-brand mb=0 h1"><img src="/static/cbitlogo.png" width="40" alt="">  </span>
+    <h3 style="color: white;">Admin</h3>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a href="{%url 'adminhome'%}" class="nav-link" style="color: white;">Home</a></li>
+      <li class="nav-item"><a href="{%url 'home'%}" class="nav-link" style="color: white;">Logout</a></li>
+    </ul>
+  </nav>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <img src="/static/logo.png">
+      <p><a href="{%url 'pending_requests'%}"><h4>Pending Requests</h4></a></p>
+      <p><a href="{%url 'show_clubs'%}"><h4>Clubs</h4></a></p>
+      <p><a href="{%url 'getevents'%}"><h4>Events</h4></a></p>
+      <p><a href="{%url 'getusers'%}"><h4>Users</h4></a></p>
+      <p><a href="{%url 'getstudentsregistered'%}"><h4>Students Registered</h4></a></p>
+
+    </div>
+  <div class="col-sm-10 text-left">
+   
+     
+   {% if data %}  
+   <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+        
+          <th scope="col">Roll No.</th>
+          <th scope="col">Email Id</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for dict_item in data %}
+      <form  class="form-container" action="{%url 'admindeleteeventanduser' %}" method="GET">
+        {% csrf_token %} 
+        <tr>
+         <th scope="row">{{forloop.counter}}</th>
+        
+         
+         
+
+         <td> {{ dict_item.rollno }} </td>
+         <td> {{ dict_item.emailid }} </td>
+          <td>
+            <button type="submit" class="btn btn-danger" name="status" value=2>Delete</button>
+            <input type="hidden" name="rollno" value= "{{dict_item.rollno}}" >
+           </td>
+        </tr>
+      </form> 
+        {% endfor %}
+      </tbody>
+    </table>
+  
+    {% endif %}
+  </div>
+
+</div>
+</div>
+
+  
+ 
+    
+
+ 
+  </body>
+</html>
+
+    
+    

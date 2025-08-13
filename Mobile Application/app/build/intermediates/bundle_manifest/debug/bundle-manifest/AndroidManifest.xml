@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.userevents"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="30" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.example.userevents.ForgotPassword" />
+        <activity android:name="com.example.userevents.MyEventsDetails" />
+        <activity android:name="com.example.userevents.MyEvents" />
+        <activity android:name="com.example.userevents.EventDetails" />
+        <activity android:name="com.example.userevents.RegistrationForm" />
+        <activity android:name="com.example.userevents.EventsInfo" />
+        <activity android:name="com.example.userevents.UpcomingEvents" />
+        <activity android:name="com.example.userevents.OngoingEvents" />
+        <activity android:name="com.example.userevents.PastEvents" />
+        <activity android:name="com.example.userevents.Dashboard" />
+        <activity android:name="com.example.userevents.HomePage" />
+        <activity android:name="com.example.userevents.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="com.example.userevents.BroadcastManager"
+            android:label="BroadcastReceiverAux" >
+            <intent-filter>
+                <action android:name="ALARM" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

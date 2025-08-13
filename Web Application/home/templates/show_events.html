@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+       body{
+          background-image: url("/static/added.jpg") ;
+          background-repeat: no-repeat;
+          background-size:cover;
+          
+          
+          
+          
+      }
+
+      .main {
+          margin-left:250px; 
+          padding: 0px 10px;
+          margin-top: 60px;
+      }
+      .sidenav {
+         height:100%; /* Full-height: remove this if you want "auto" height */
+         width: 160px; /* Set the width of the sidebar */
+         position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+         z-index: 1; /* Stay on top */
+         top:20mm; /* Stay at the top */
+         left: 0;
+         /* Black */
+         overflow-x: hidden; /* Disable horizontal scroll */
+         padding-top: 20px;
+      }
+
+/* The navigation menu links */
+      .sidenav a {
+         padding: 6px 8px 6px 16px;
+         text-decoration: none;
+         font-size: 25px;
+         color: white;
+         display: block;
+      }
+      .sidenav a:hover {
+        color: #2196F3;
+      }
+
+       
+    
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <span class="navbar-brand mb=0 h1"><img src="/static/cbitlogo.png" width="40" alt="">  </span>
+    <h3 style="color: white;">club</h3>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{%url 'clubhome'%}" class="nav-link" style="color: white;">Home</a></li>
+        <li class="nav-item"><a href="{%url 'profile'%}" class="nav-link" style="color: white;">My profile</a></li>
+        <li class="nav-item"><a href="{%url 'home'%}" class="nav-link" style="color: white;">logout</a></li>
+
+    </ul>
+  </nav>
+     
+   {% if data %}  
+   <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          {% for key in data.0.keys %}
+          <th scope="col">{{ key }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+      {% for dict_item in data %}
+      <form  class="form-container" action="{%url 'deleteevent' %}" method="POST">
+        {% csrf_token %} 
+        <tr>
+         <th scope="row">{{forloop.counter}}</th>
+         {% for value in dict_item.values %}
+
+         
+         <td> {{ value }} </td>
+
+         {% endfor %}
+         <td>
+          
+         <button type="submit" class="btn btn-danger" name="status" value=0>Delete</button>
+         <input type="hidden" name="eventname" value= "{{dict_item.eventname}}" >
+        </td>
+          
+        </tr>
+      </form> 
+        {% endfor %}
+      </tbody>
+    </table>
+  
+{% endif %}
+
+  
+ 
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+  </body>
+</html>
+
+    
+    

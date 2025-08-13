@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+      input[type=text]{
+        border:solid dimgray;
+      }
+      input[type=password]{
+        border:solid dimgray;
+      }
+      .form-container{
+        position: absolute;
+        top: 10vh;
+        
+    }
+
+    @media only screen and (max-width: 678px){
+        .bg{
+                background-size: 300%;
+        }
+    }
+    body{
+          
+          background-size: cover;
+    }
+  </style>
+ 
+</head>  
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <span class="navbar-brand mb=0 h1"><img src="/static/cbitlogo.png" width="40" alt="">  </span>
+    <h3 style="color: white;">Events</h3>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{%url 'admin'%}" class="nav-link" style="color: white;">Admin Login</a></li>
+        <li class="nav-item"><a href="{%url 'clublog'%}" class="nav-link" style="color: white;">Club Login</a></li>
+        <li class="nav-item"><a href="{%url 'clubsign'%}" class="nav-link" style="color: white;">Club Signup</a></li>
+
+    </ul>
+  </nav>
+<section class="container-fluid bg">
+    <section class="row justify-content-center">
+        <section class="col-12 col-sm-6 col-md-3">
+            <form class="form-container" id="myform" action="{%url 'after_reg' %}" method="POST" >
+                {%csrf_token%}
+                <div class="form-group">
+                  <h1>{{data}}</h1>
+                  <label for="clubname">Username</label>
+                  <input type="text" class="form-control" id="clubname" name="clubname"  required='true'>
+                </div>
+                <div class="form-group">
+                  <label for="clubpwd">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" name="clubpwd"  required='true'>
+                </div>
+                
+      
+                <div class="form-group">
+                  <label for="clubhead">Club Head</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" name="clubhead"  required='true'>
+                </div>
+                <div class="form-group">
+                    <label for="phoneno">Phone no</label>
+                    <input type="text" class="form-control" id="phoneno" name="phoneno"  required='true'>
+                </div>
+                <div class="form-group">
+                    <label for="emailid">Email Id</label>
+                    <input type="text" class="form-control" id="emailid" name="emailid"  required='true'>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Signup</button>
+            </form>
+
+
+        </section>
+    </section>
+</section> 
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
